@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>UX Assessment | Justin | 18979</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --coffee: #2C1A0E;
+    --espresso: #4A2C1A;
+    --cream: #F5EDD8;
+    --latte: #C4996A;
+    --foam: #FDF8F0;
+    --text: #1A1009;
+    --muted: #8C6D52;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--foam);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--coffee);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  }
+  .nav-brand { color: var(--latte); font-family: 'DM Serif Display', serif; font-size: 1.1rem; letter-spacing: 0.02em; }
+  .nav-id { color: var(--muted); font-size: 0.8rem; font-weight: 300; }
+  .nav-links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .nav-links a {
+    color: var(--cream); font-size: 0.75rem; text-decoration: none;
+    padding: 0.3rem 0.6rem; border-radius: 4px;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .nav-links a:hover { background: var(--espresso); color: var(--latte); }
+
+  /* HERO */
+  header {
+    background: linear-gradient(135deg, var(--coffee) 0%, var(--espresso) 60%, #7A4E2D 100%);
+    color: var(--cream);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 30%, rgba(196,153,106,0.15) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em;
+    color: var(--latte); text-transform: uppercase; margin-bottom: 1rem;
+  }
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    line-height: 1.1; margin-bottom: 1rem;
+  }
+  header h1 em { font-style: italic; color: var(--latte); }
+  .hero-meta {
+    display: inline-flex; gap: 2rem;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(196,153,106,0.3);
+    border-radius: 50px;
+    padding: 0.6rem 1.8rem;
+    margin-top: 1.5rem;
+    font-size: 0.85rem; color: var(--cream);
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 0.4rem; }
+  .hero-meta span::before { content: '▸'; color: var(--latte); }
+
+  /* QR SECTION */
+  .qr-bar {
+    background: var(--cream);
+    border-bottom: 2px solid var(--latte);
+    padding: 1.2rem 2rem;
+    display: flex; align-items: center; justify-content: center; gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .qr-bar p { font-size: 0.85rem; color: var(--muted); }
+  .qr-box {
+    width: 80px; height: 80px;
+    border: 2px solid var(--coffee);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    background: white;
+  }
+  .qr-box img { width: 100%; height: 100%; object-fit: contain; }
+  .qr-placeholder {
+    width: 80px; height: 80px;
+    background: white;
+    border: 2px solid var(--coffee);
+    border-radius: 6px;
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    grid-template-rows: repeat(7,1fr);
+    gap: 1.5px; padding: 6px;
+  }
+  .qr-placeholder div { background: var(--coffee); border-radius: 1px; }
+
+  /* MAIN */
+  main { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  /* BACKGROUND SECTION */
+  .bg-section {
+    background: white;
+    border: 1px solid #E8DDD0;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+  .bg-section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem; color: var(--coffee);
+    margin-bottom: 0.75rem;
+  }
+  .bg-section p { color: #4A3728; font-size: 0.9rem; margin-bottom: 0.75rem; }
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem; margin-top: 1rem;
+  }
+  .stat-card {
+    background: var(--foam);
+    border: 1px solid #E0D0BC;
+    border-radius: 8px; padding: 1rem;
+    text-align: center;
+  }
+  .stat-card .num { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--latte); }
+  .stat-card .label { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+
+  /* TASKS */
+  .tasks-header {
+    display: flex; align-items: center; gap: 1rem;
+    margin: 2.5rem 0 1.5rem;
+  }
+  .tasks-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem; color: var(--coffee);
+  }
+  .tasks-header::after {
+    content: ''; flex: 1;
+    height: 1px; background: linear-gradient(to right, var(--latte), transparent);
+  }
+
+  .task-card {
+    background: white;
+    border: 1px solid #E8DDD0;
+    border-radius: 12px;
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .task-card:hover { box-shadow: 0 4px 20px rgba(44,26,14,0.1); }
+
+  .task-header {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  .task-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--coffee); color: var(--latte);
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem; font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .task-title { font-weight: 600; font-size: 0.95rem; flex: 1; color: var(--text); }
+  .task-toggle {
+    width: 24px; height: 24px;
+    border: none; background: none; cursor: pointer;
+    color: var(--muted); font-size: 1.2rem;
+    transition: transform 0.3s;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0;
+  }
+  .task-toggle.open { transform: rotate(180deg); }
+
+  .task-body {
+    border-top: 1px solid #F0E6D8;
+    padding: 0 1.5rem;
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s;
+  }
+  .task-body.open { max-height: 800px; padding: 1.25rem 1.5rem; }
+
+  .task-body h4 { font-size: 0.85rem; font-weight: 600; color: var(--latte); text-transform: uppercase; letter-spacing: 0.08em; margin: 1rem 0 0.4rem; }
+  .task-body h4:first-child { margin-top: 0; }
+  .task-body ul { list-style: none; padding: 0; }
+  .task-body ul li { font-size: 0.88rem; color: #4A3728; padding: 0.25rem 0 0.25rem 1.2rem; position: relative; }
+  .task-body ul li::before { content: '·'; position: absolute; left: 0; color: var(--latte); font-size: 1.2rem; line-height: 1.2; }
+  .task-body p { font-size: 0.88rem; color: #4A3728; margin-bottom: 0.5rem; }
+  .task-body .note {
+    background: var(--foam); border-left: 3px solid var(--latte);
+    border-radius: 0 6px 6px 0; padding: 0.75rem 1rem;
+    font-size: 0.83rem; color: var(--muted); margin-top: 0.75rem;
+  }
+  .status-badge {
+    display: inline-block;
+    padding: 0.2rem 0.65rem;
+    border-radius: 20px;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .badge-todo { background: #FEF3E2; color: #B86A00; border: 1px solid #F5C069; }
+  .badge-done { background: #E8F5E9; color: #2E7D32; border: 1px solid #A5D6A7; }
+
+  .checklist { list-style: none; padding: 0; }
+  .checklist li { display: flex; align-items: center; gap: 0.6rem; padding: 0.3rem 0; font-size: 0.88rem; color: #4A3728; }
+  .checklist input[type=checkbox] { accent-color: var(--coffee); width: 15px; height: 15px; cursor: pointer; }
+
+  /* FOOTER */
+  footer {
+    background: var(--coffee);
+    color: var(--muted);
+    text-align: center; padding: 2rem;
+    font-size: 0.8rem;
+  }
+  footer strong { color: var(--latte); }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    header { padding: 3rem 1.5rem 2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div>
+    <div class="nav-brand">WIC Café — UX Assessment</div>
+    <div class="nav-id">Justin · ID: 18979</div>
+  </div>
+  <div class="nav-links">
+    <a href="#background">Background</a>
+    <a href="#task1">T1</a><a href="#task2">T2</a><a href="#task3">T3</a>
+    <a href="#task4">T4</a><a href="#task5">T5</a><a href="#task6">T6</a>
+    <a href="#task7">T7</a><a href="#task8">T8</a>
+  </div>
+</nav>
+
+<header>
+  <p class="hero-eyebrow">User Experience Design · Assessment 1</p>
+  <h1>WIC Café<br/><em>Website Project</em></h1>
+  <div class="hero-meta">
+    <span>Justin</span>
+    <span>Student ID: 18979</span>
+    <span>8 Tasks</span>
+  </div>
+</header>
+
+<!-- QR BAR -->
+<div class="qr-bar">
+  <p>📱 Scan to view on mobile — or share this page easily</p>
+  <div id="qr-container"></div>
+  <p style="font-size:0.75rem; color:var(--muted); max-width:200px;">QR code generated from this page's URL</p>
+</div>
+
+<main>
+
+  <!-- BACKGROUND -->
+  <section id="background" class="bg-section">
+    <h2>Project Background</h2>
+    <p>WIC Café needs a website to adapt to post-COVID changes in customer behaviour. The café experienced a <strong>60% sales drop</strong> due to restrictions and social distancing, and seeks an online ordering and delivery channel.</p>
+    <p><strong>References:</strong> denbisco.com · noccoffeeco.com</p>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="num">2,875</div><div class="label">Cups/week (pre-COVID)</div></div>
+      <div class="stat-card"><div class="num">60%</div><div class="label">Sales drop (COVID)</div></div>
+      <div class="stat-card"><div class="num">4</div><div class="label">Web pages</div></div>
+      <div class="stat-card"><div class="num">6+</div><div class="label">Test users needed</div></div>
+    </div>
+  </section>
+
+  <!-- TASKS HEADING -->
+  <div class="tasks-header"><h2>Your Tasks</h2></div>
+
+  <!-- TASK 1 -->
+  <div class="task-card" id="task1">
+    <div class="task-header" onclick="toggle(this)">
+      <div class="task-num">1</div>
+      <div class="task-title">Analyse Business Requirements, Problems & Goals</div>
+      <span class="status-badge badge-todo">To Do</span>
+      <button class="task-toggle">▾</button>
+    </div>
+    <div class="task-body">
+      <h4>Problems to Address</h4>
+      <ul>
+        <li>Decline in customer numbers</li>
+        <li>Strict social distancing regulations</li>
+        <li>No online ordering channel</li>
+        <li><em>Add more as identified…</em></li>
+      </ul>
+      <h4>Business Needs</h4>
+      <ul>
+        <li>A functional business website</li>
+        <li>Online ordering capability</li>
+        <li><em>Add more as identified…</em></li>
+      </ul>
+      <h4>Goals</h4>
+      <ul>
+        <li>Increase revenue through new online order &amp; delivery channel</li>
+        <li>Maintain customer engagement during restrictions</li>
+        <li><em>Add more as identified…</em></li>
+      </ul>
+      <div class="note">📝 Document findings with evidence and present to trainer.</div>
+    </div>
+  </div>
+
+  <!-- TASK 2 -->
+  <div class="task-card" id="task2">
+    <div class="task-header" onclick="toggle(this)">
+      <div class="task-num">2</div>
+      <div class="task-title">Select Target Users & Develop 2 Personas</div>
+      <span class="status-badge badge-todo">To Do</span>
+      <button class="task-toggle">▾</button>
+    </div>
+    <div class="task-body">
+      <h4>Target User Groups</h4>
+      <ul>
+        <li>Local community members</li>
+        <li>Office staff near the café location</li>
+        <li>Tourists and travellers</li>
+        <li>Any coffee &amp; food lovers who can order online</li>
+      </ul>
+      <h4>Café Demographics (Pre-COVID)</h4>
+      <ul>
+        <li>10–15 yrs: 5%</li>
+        <li>16–25 yrs: 20%</li>
+        <li>26–35 yrs: 30%</li>
+        <li>36–45 yrs: 30%</li>
+        <li>Over 45: 15%</li>
+      </ul>
+      <h4>Deliverable</h4>
+      <ul>
+        <li>Create <strong>2 detailed personas</strong> with name, age, goals, frustrations, and behaviours</li>
+      </ul>
+      <div class="note">📝 Include persona cards with photos, demographics, and user goals.</div>
+    </div>
+  </div>
+
+  <!-- TASK 3 -->
+  <div class="task-card" id="task3">
+    <div class="task-header" onclick="toggle(this)">
+      <div class="task-num">3</div>
+      <div class="task-title">Develop Wireframe & Digital Prototype</div>
+      <span class="status-badge badge-todo">To Do</span>
+      <button class="task-toggle">▾</button>
+    </div>
+    <div class="task-body">
+      <h4>Website Pages Required (4 pages)</h4>
+      <ul>
+        <li>🏠 Home</li>
+        <li>ℹ️ About Us</li>
+        <li>☕ Products</li>
+        <li>📬 Contact Us</li>
+      </ul>
+      <h4>Steps</h4>
+      <ul>
+        <li>Draw wireframes for all 4 pages (hand-drawn or digital)</li>
+        <li>Present wireframes to trainer</li>
+        <li>Amend design based on trainer feedback (if required)</li>
+        <li>Develop a digital interactive prototype</li>
+      </ul>
+      <div class="note">📝 Use tools like Figma, Balsamiq, or Adobe XD. Include screenshots as evidence.</div>
+    </div>
+  </div>
+
+  <!-- TASK 4 -->
+  <div class="task-card" id="task4">
+    <div class="task-header" onclick="toggle(this)">
+      <div class="task-num">4</div>
+      <div class="task-title">Develop a Usability Testing Plan</div>
+      <span class="status-badge badge-todo">To Do</span>
+      <button class="task-toggle">▾</button>
+    </div>
+    <div class="task-body">
+      <h4>Plan Components</h4>
+      <ul>
+        <li>Define testing objectives and success criteria</li>
+        <li>Select testing method (e.g. Google Forms survey)</li>
+        <li>Identify target participants (at least 6)</li>
+        <li>Prepare tasks and questions for testers</li>
+        <li>Design data collection format (e.g. spreadsheet/Excel)</li>
+      </ul>
+      <h4>Suggested Tool</h4>
+      <ul>
+        <li>Google Forms for collecting feedback</li>
+        <li>Export data to Excel for analysis</li>
+      </ul>
+      <div class="note">📝 Reference: <a href="https://www.youtube.com/watch?v=BtoOHhA3aPQ" target="_blank">Usability Testing Guide (YouTube)</a></div>
+    </div>
+  </div>
+
+  <!-- TASK 5 -->
+  <div class="task-card" id="task5">
+    <div class="task-header" onclick="toggle(this)">
+      <div class="task-num">5</div>
+      <div class="task-title">Conduct Usability Testing with 6+ Users</div>
+      <span class="status-badge badge-todo">To Do</span>
+      <button class="task-toggle">▾</button>
+    </div>
+    <div class="task-body">
+      <h4>Requirements</h4>
+      <ul>
+        <li>Recruit at least <strong>6 target users</strong> to test the prototype</li>
+        <li>Distribute the usability testing form (Google Form or similar)</li>
+        <li>Collect and record all responses</li>
+      </ul>
+      <h4>Deliverable</h4>
+      <ul>
+        <li>Screenshot of responses/results from all 6+ users</li>
+        <li>Summary table or chart of feedback data</li>
+      </ul>
+      <div class="note">📝 Gather at minimum 6 feedback responses. Export results as evidence for Task 8.</div>
+    </div>
+  </div>
+
+  <!-- TASK 6 -->
+  <div class="task-card" id="task6">
+    <div class="task-header" onclick="toggle(this)">
+      <div class="task-num">6</div>
+      <div class="task-title">Evaluate Results, Highlight Abnormal Values & Apply Improvements</div>
+      <span class="status-badge badge-todo">To Do</span>
+      <button class="task-toggle">▾</button>
+    </div>
+    <div class="task-body">
+      <h4>Part 1 — Evaluate & Summarise</h4>
+      <ul>
+        <li>Review all feedback data collected in Task 5</li>
+        <li>Prepare a written summary of findings</li>
+        <li>Identify patterns and trends</li>
+      </ul>
+      <h4>Part 2 — Highlight Abnormal Values</h4>
+      <ul>
+        <li>Identify any outlier or unexpected responses</li>
+        <li>Discuss possible reasons for abnormal values</li>
+      </ul>
+      <h4>Part 3 — Improvements</h4>
+      <ul>
+        <li>List changes/improvements to apply to the prototype</li>
+        <li>Get approval from trainer before implementing</li>
+        <li>Apply changes and document them</li>
+      </ul>
+      <div class="note">📝 Present before/after comparisons where possible to demonstrate improvements made.</div>
+    </div>
+  </div>
+
+  <!-- TASK 7 -->
+  <div class="task-card" id="task7">
+    <div class="task-header" onclick="toggle(this)">
+      <div class="task-num">7</div>
+      <div class="task-title">Quality Assurance Process & Checklist</div>
+      <span class="status-badge badge-todo">To Do</span>
+      <button class="task-toggle">▾</button>
+    </div>
+    <div class="task-body">
+      <h4>Part 1 — Identify & Develop QA Process</h4>
+      <ul>
+        <li>Define the quality standards for the café website</li>
+        <li>Design a QA checklist covering all website pages</li>
+      </ul>
+      <h4>Part 2 — QA Checklist Items (example)</h4>
+      <ul class="checklist" id="qa-list">
+        <li><input type="checkbox"/> All 4 pages load correctly</li>
+        <li><input type="checkbox"/> Navigation links work on all pages</li>
+        <li><input type="checkbox"/> Contact form submits correctly</li>
+        <li><input type="checkbox"/> Website is responsive on mobile</li>
+        <li><input type="checkbox"/> Images load properly</li>
+        <li><input type="checkbox"/> Content is free of spelling errors</li>
+        <li><input type="checkbox"/> Student name &amp; ID displayed</li>
+        <li><input type="checkbox"/> QR code is functional</li>
+      </ul>
+      <h4>Part 3 — Conduct QA Testing</h4>
+      <ul>
+        <li>Complete the checklist above</li>
+        <li>Document any issues found and how they were resolved</li>
+      </ul>
+      <div class="note">📝 Use the checklist above as a starting point and expand it for your specific site.</div>
+    </div>
+  </div>
+
+  <!-- TASK 8 -->
+  <div class="task-card" id="task8">
+    <div class="task-header" onclick="toggle(this)">
+      <div class="task-num">8</div>
+      <div class="task-title">Organise Documentation & Prepare Final Report</div>
+      <span class="status-badge badge-todo">To Do</span>
+      <button class="task-toggle">▾</button>
+    </div>
+    <div class="task-body">
+      <h4>Report Requirements</h4>
+      <ul>
+        <li>Follow a standard report writing format</li>
+        <li>Include screenshots and evidence for each task (Tasks 1–7)</li>
+        <li>Cover page with student name (<strong>Justin</strong>) and ID (<strong>18979</strong>)</li>
+        <li>Table of contents</li>
+        <li>Sections for each task with findings and evidence</li>
+        <li>Conclusion and recommendations</li>
+      </ul>
+      <h4>Evidence to Include</h4>
+      <ul>
+        <li>Business analysis notes (Task 1)</li>
+        <li>Persona documents (Task 2)</li>
+        <li>Wireframe and prototype screenshots (Task 3)</li>
+        <li>Usability testing plan &amp; form (Task 4)</li>
+        <li>User feedback screenshots and data (Task 5)</li>
+        <li>Evaluation summary &amp; improvement notes (Task 6)</li>
+        <li>Completed QA checklist (Task 7)</li>
+        <li>Live website link &amp; QR code</li>
+      </ul>
+      <div class="note">📝 Ensure the website is responsive and accessible by phone. Include a working QR code linking to your live site.</div>
+    </div>
+  </div>
+
+</main>
+
+<!-- BOTTOM QR SECTION -->
+<section id="qr-section" style="background: var(--coffee); padding: 3rem 2rem; text-align: center;">
+  <p style="color: var(--latte); font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin-bottom: 0.4rem;">Open on Your Phone</p>
+  <p style="color: var(--muted); font-size: 0.82rem; margin-bottom: 1.5rem;">Scan this QR code with your phone camera to open the site</p>
+
+  <!-- QR Display -->
+  <div id="qr-bottom" style="display:inline-block; background:white; padding:14px; border-radius:12px; margin-bottom:1.5rem; box-shadow: 0 4px 24px rgba(0,0,0,0.4);"></div>
+
+  <!-- URL shown under QR -->
+  <p id="qr-url-display" style="color: var(--cream); font-size: 0.78rem; margin-bottom: 1.5rem; word-break: break-all; max-width: 400px; margin-left:auto; margin-right:auto;"></p>
+
+  <!-- Input to update URL -->
+  <div style="max-width: 480px; margin: 0 auto;">
+    <p style="color: var(--muted); font-size: 0.75rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.1em;">📌 Once hosted, paste your live URL here to update the QR code:</p>
+    <div style="display:flex; gap:0.5rem;">
+      <input id="url-input" type="url" placeholder="https://your-site.github.io/ux/"
+        style="flex:1; padding:0.6rem 0.9rem; border-radius:6px; border:1px solid #5A3A22;
+               background:#1A0D06; color:var(--cream); font-size:0.85rem; outline:none;"/>
+      <button onclick="updateQR()"
+        style="padding:0.6rem 1.1rem; background:var(--latte); color:var(--coffee);
+               font-weight:700; border:none; border-radius:6px; cursor:pointer; font-size:0.85rem; white-space:nowrap;">
+        Update QR
+      </button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>User Experience Design · Assessment 1 · WIC Café Project</p>
+  <p style="margin-top:0.4rem;"><strong>Justin</strong> · Student ID: <strong>18979</strong></p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  let qrBottom = null;
+  let qrTop = null;
+
+  function makeQR(container, text, size) {
+    container.innerHTML = '';
+    return new QRCode(container, {
+      text: text,
+      width: size, height: size,
+      colorDark: '#2C1A0E',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  }
+
+  function initQRCodes() {
+    const url = window.location.href;
+
+    // Top bar QR (small)
+    const topContainer = document.getElementById('qr-container');
+    topContainer.style.cssText = 'width:80px;height:80px;border-radius:6px;overflow:hidden;';
+    makeQR(topContainer, url, 80);
+
+    // Bottom QR (large)
+    qrBottom = makeQR(document.getElementById('qr-bottom'), url, 180);
+    document.getElementById('qr-url-display').textContent = url;
+  }
+
+  function updateQR() {
+    const input = document.getElementById('url-input').value.trim();
+    if (!input) return;
+    let url = input;
+    if (!url.startsWith('http')) url = 'https://' + url;
+
+    // Rebuild both QRs with new URL
+    const topContainer = document.getElementById('qr-container');
+    topContainer.style.cssText = 'width:80px;height:80px;border-radius:6px;overflow:hidden;';
+    makeQR(topContainer, url, 80);
+    makeQR(document.getElementById('qr-bottom'), url, 180);
+    document.getElementById('qr-url-display').textContent = url;
+    document.getElementById('url-input').value = '';
+
+    // Flash confirmation
+    const btn = document.querySelector('#qr-section button');
+    btn.textContent = '✓ Updated!';
+    btn.style.background = '#7DB87D';
+    setTimeout(() => { btn.textContent = 'Update QR'; btn.style.background = 'var(--latte)'; }, 2000);
+  }
+
+  // Allow pressing Enter in input
+  document.getElementById('url-input').addEventListener('keydown', e => { if (e.key === 'Enter') updateQR(); });
+
+  // Toggle task bodies
+  function toggle(header) {
+    const body = header.nextElementSibling;
+    const btn = header.querySelector('.task-toggle');
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    btn.classList.toggle('open', !isOpen);
+  }
+
+  initQRCodes();
+  document.querySelector('.task-header').click();
+</script>
+</body>
+</html>
